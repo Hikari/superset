@@ -241,15 +241,17 @@ class HeaderActionsDropdown extends React.PureComponent {
             />
           </Menu.Item>
         )}
-        <ShareMenuItems
-          url={url}
-          copyMenuItemTitle={t('Copy dashboard URL')}
-          emailMenuItemTitle={t('Share dashboard by email')}
-          emailSubject={emailSubject}
-          emailBody={emailBody}
-          addSuccessToast={addSuccessToast}
-          addDangerToast={addDangerToast}
-        />
+        {userCanEdit && (
+          <ShareMenuItems
+            url={url}
+            copyMenuItemTitle={t('Copy dashboard URL')}
+            emailMenuItemTitle={t('Share dashboard by email')}
+            emailSubject={emailSubject}
+            emailBody={emailBody}
+            addSuccessToast={addSuccessToast}
+            addDangerToast={addDangerToast}
+          />
+        )}
         <Menu.Item
           key={MENU_KEYS.REFRESH_DASHBOARD}
           data-test="refresh-dashboard-menu-item"
