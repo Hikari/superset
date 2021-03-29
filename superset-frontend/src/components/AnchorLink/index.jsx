@@ -27,7 +27,7 @@ import getLocationHash from 'src/dashboard/util/getLocationHash';
 const propTypes = {
   anchorLinkId: PropTypes.string.isRequired,
   filters: PropTypes.object,
-  //showShortLinkButton: PropTypes.bool,
+  showShortLinkButton: PropTypes.bool,
   inFocus: PropTypes.bool,
   placement: PropTypes.oneOf(['right', 'left', 'top', 'bottom']),
 };

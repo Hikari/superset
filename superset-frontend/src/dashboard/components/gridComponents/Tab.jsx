@@ -219,7 +219,8 @@ export default class Tab extends React.PureComponent {
               <AnchorLink
                 anchorLinkId={component.id}
                 filters={filters}
-                showShortLinkButton
+                // showShortLinkButton
+                false
                 placement={index >= 5 ? 'left' : 'right'}
               />
             )}
