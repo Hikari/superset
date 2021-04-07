@@ -21,6 +21,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { SuperChart, logging, Behavior } from '@superset-ui/core';
 import { Logger, LOG_ACTIONS_RENDER_CHART } from '../logger/LogUtils';
+import watermark from '../../images/watermark.png';
 
 const propTypes = {
   annotationData: PropTypes.object,
@@ -212,25 +213,39 @@ class ChartRenderer extends React.Component {
         : '';
 
     return (
-      <SuperChart
-        disableErrorBoundary
-        key={`${chartId}${webpackHash}`}
-        id={`chart-id-${chartId}`}
-        className={chartClassName}
-        chartType={vizType}
-        width={width}
-        height={height}
-        annotationData={annotationData}
-        datasource={datasource}
-        initialValues={initialValues}
-        formData={formData}
-        ownCurrentState={ownCurrentState}
-        hooks={this.hooks}
-        behaviors={[Behavior.CROSS_FILTER]}
-        queriesData={queriesResponse}
-        onRenderSuccess={this.handleRenderSuccess}
-        onRenderFailure={this.handleRenderFailure}
-      />
+      <>
+        <SuperChart
+          disableErrorBoundary
+          key={`${chartId}${webpackHash}`}
+          id={`chart-id-${chartId}`}
+          className={chartClassName}
+          chartType={vizType}
+          width={width}
+          height={height}
+          annotationData={annotationData}
+          datasource={datasource}
+          initialValues={initialValues}
+          formData={formData}
+          ownCurrentState={ownCurrentState}
+          hooks={this.hooks}
+          behaviors={[Behavior.CROSS_FILTER]}
+          queriesData={queriesResponse}
+          onRenderSuccess={this.handleRenderSuccess}
+          onRenderFailure={this.handleRenderFailure}
+        />
+        {this.handleRenderSuccess && (
+          <img
+            src={watermark}
+            alt="watermark"
+            style={{
+              position: 'absolute',
+              right: 0,
+              width: '7vw',
+              opacity: 0.5,
+            }}
+          />
+        )}
+      </>
     );
   }
 }
