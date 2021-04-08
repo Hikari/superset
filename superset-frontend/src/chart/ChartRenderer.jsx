@@ -240,7 +240,7 @@ class ChartRenderer extends React.Component {
             style={{
               position: 'absolute',
               right: 0,
-              width: '7vw',
+              bottom: 0,
               opacity: 0.5,
             }}
           />
