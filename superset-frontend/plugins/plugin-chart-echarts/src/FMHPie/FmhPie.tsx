@@ -21,7 +21,7 @@ import { PieChartTransformedProps } from './types';
 import Echart from '../components/Echart';
 import { EventHandlers } from '../types';
 
-export default function EchartsPie({
+export default function FmhPie({
   height,
   width,
   echartOptions,
@@ -81,7 +81,7 @@ export default function EchartsPie({
 
   return (
     <>
-      <p>description</p>
+      <p>description data1 - data {formData.dateFormat}</p>
       <Echart
         height={height}
         width={width}

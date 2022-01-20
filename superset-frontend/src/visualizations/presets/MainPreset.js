@@ -53,6 +53,7 @@ import {
   BigNumberChartPlugin,
   BigNumberTotalChartPlugin,
   EchartsPieChartPlugin,
+  FmhPieChartPlugin,
   EchartsBoxPlotChartPlugin,
   EchartsAreaChartPlugin,
   EchartsTimeseriesChartPlugin,
@@ -78,6 +79,7 @@ import {
   GroupByFilterPlugin,
 } from 'src/filters/components/';
 import { PivotTableChartPlugin as PivotTableChartPluginV2 } from '@superset-ui/plugin-chart-pivot-table';
+//import { SupersetPluginChartFmhPie } from 'superset-plugin-chart-fmh-pie';
 import FilterBoxChartPlugin from '../FilterBox/FilterBoxChartPlugin';
 import TimeTableChartPlugin from '../TimeTable';
 
@@ -126,6 +128,7 @@ export default class MainPreset extends Preset {
         new ParallelCoordinatesChartPlugin().configure({ key: 'para' }),
         new PartitionChartPlugin().configure({ key: 'partition' }),
         new EchartsPieChartPlugin().configure({ key: 'pie' }),
+        new FmhPieChartPlugin().configure({ key: 'fmhpie' }),
         new PivotTableChartPlugin().configure({ key: 'pivot_table' }),
         new PivotTableChartPluginV2().configure({ key: 'pivot_table_v2' }),
         new RoseChartPlugin().configure({ key: 'rose' }),
@@ -164,6 +167,7 @@ export default class MainPreset extends Preset {
         new TimeColumnFilterPlugin().configure({ key: 'filter_timecolumn' }),
         new TimeGrainFilterPlugin().configure({ key: 'filter_timegrain' }),
         new EchartsTreeChartPlugin().configure({ key: 'tree_chart' }),
+        //new SupersetPluginChartFmhPie().configure({ key: 'fmh_pie' }),
         ...experimentalplugins,
       ],
     });
