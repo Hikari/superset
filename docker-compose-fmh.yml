@@ -31,6 +31,8 @@ services:
     restart: unless-stopped
     volumes:
       - redis:/data
+    networks:
+      - redis-net
 
   db:
     env_file: docker/.env-non-dev
@@ -39,6 +41,8 @@ services:
     restart: unless-stopped
     volumes:
       - db_home:/var/lib/postgresql/data
+    networks:
+      - db-net
 
   superset:
     env_file: docker/.env-non-dev
@@ -53,6 +57,9 @@ services:
       - nginx-proxy_default
     depends_on: *superset-depends-on
     volumes: *superset-volumes
+    networks:
+      - db-net
+      - redis-net
 
   superset-init:
     image: *superset-image
@@ -62,6 +69,9 @@ services:
     depends_on: *superset-depends-on
     user: "root"
     volumes: *superset-volumes
+    networks:
+      - db-net
+      - redis-net
 
   superset-worker:
     image: *superset-image
@@ -72,6 +82,9 @@ services:
     depends_on: *superset-depends-on
     user: "root"
     volumes: *superset-volumes
+    networks:
+      - db-net
+      - redis-net
 
   superset-worker-beat:
     image: *superset-image
@@ -82,6 +95,9 @@ services:
     depends_on: *superset-depends-on
     user: "root"
     volumes: *superset-volumes
+    networks:
+      - db-net
+      - redis-net
 
 volumes:
   superset_home:
@@ -92,6 +108,8 @@ volumes:
     external: false
 
 networks:
+  db-net:
+  redis-net:
   nginx-proxy_default:
     external: true
     driver: bridge
