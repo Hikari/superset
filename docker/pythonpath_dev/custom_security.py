@@ -1,5 +1,9 @@
+import uuid
+
 import requests
 from flask import redirect, g, flash, request
+from flask_appbuilder._compat import as_unicode
+from flask_appbuilder.security.forms import LoginForm_db
 from flask_appbuilder.security.views import UserDBModelView, AuthDBView
 from werkzeug.debug.repr import dump
 
@@ -73,6 +77,20 @@ class CustomAuthDBView(AuthDBView):
     def login(self):
         token = request.args.get('token')
         logger.info("token {}".format(token))
+
+        # do the form login
+        form = LoginForm_db()
+        if form.validate_on_submit():
+            user = self.appbuilder.sm.auth_user_db(
+                form.username.data, form.password.data
+            )
+            if not user:
+                flash(as_unicode(self.invalid_login_message), "warning")
+                return redirect(self.appbuilder.get_url_for_login)
+            login_user(user, remember=False)
+            return redirect(self.appbuilder.get_url_for_index)
+
+        # or the token login
         if not token:
             token = request.cookies.get('access_token')
         if token is not None:
@@ -88,7 +106,7 @@ class CustomAuthDBView(AuthDBView):
                                                        'new-users',
                                                        new_user['email'],
                                                        role,
-                                                       password="4TCM8fF%R4UG@JBSQ6$hX")
+                                                       password=uuid.uuid4())
                     logger.info("not user")
                 if user:
                     logger.info("user")
@@ -97,8 +115,11 @@ class CustomAuthDBView(AuthDBView):
                     if not redirect_url:
                         redirect_url = self.appbuilder.get_url_for_index
                     return redirect(redirect_url)
-            else:
-                return super(CustomAuthDBView, self).login()
+        else:
+            return self.render_template(
+                self.login_template, title=self.title, form=form,
+                appbuilder=self.appbuilder
+            )
 
 
 class CustomSecurityManager(SupersetSecurityManager):

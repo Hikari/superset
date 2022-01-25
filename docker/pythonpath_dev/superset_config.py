@@ -118,5 +118,9 @@ except ImportError:
     logger.info("Using default Docker config...")
 
 
-#from custom_security import CustomSecurityManager
-#CUSTOM_SECURITY_MANAGER = CustomSecurityManager
+from custom_security import CustomSecurityManager
+CUSTOM_SECURITY_MANAGER = CustomSecurityManager
+
+
+SESSION_COOKIE_SECURE = True  # Prevent cookie from being transmitted over non-tls?
+SESSION_COOKIE_SAMESITE = "None"  # One of [None, 'None', 'Lax', 'Strict']
