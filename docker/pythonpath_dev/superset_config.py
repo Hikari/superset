@@ -118,6 +118,8 @@ except ImportError:
     logger.info("Using default Docker config...")
 
 
+BABEL_DEFAULT_LOCALE = "de"
+
 from custom_security import CustomSecurityManager
 CUSTOM_SECURITY_MANAGER = CustomSecurityManager
 
