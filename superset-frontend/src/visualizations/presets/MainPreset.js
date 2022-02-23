@@ -79,7 +79,7 @@ import {
   GroupByFilterPlugin,
 } from 'src/filters/components/';
 import { PivotTableChartPlugin as PivotTableChartPluginV2 } from '@superset-ui/plugin-chart-pivot-table';
-//import { SupersetPluginChartFmhPie } from 'superset-plugin-chart-fmh-pie';
+// import { SupersetPluginChartFmhPie } from 'superset-plugin-chart-fmh-pie';
 import FilterBoxChartPlugin from '../FilterBox/FilterBoxChartPlugin';
 import TimeTableChartPlugin from '../TimeTable';
 
