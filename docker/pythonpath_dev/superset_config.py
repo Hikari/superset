@@ -68,6 +68,7 @@ REDIS_CELERY_DB = get_env_variable("REDIS_CELERY_DB", "0")
 REDIS_RESULTS_DB = get_env_variable("REDIS_RESULTS_DB", "1")
 
 RESULTS_BACKEND = FileSystemCache("/app/superset_home/sqllab")
+BABEL_DEFAULT_LOCALE = "de"
 LANGUAGES = {
     'de': {'flag': 'de', 'name': 'German'},
     'en': {'flag': 'us', 'name': 'English'},
