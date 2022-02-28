@@ -81,7 +81,6 @@ export default function EchartsPie({
 
   return (
     <>
-      <p>description</p>
       <Echart
         height={height}
         width={width}
