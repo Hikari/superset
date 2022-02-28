@@ -18,31 +18,32 @@
  */
 import React, { FC, useCallback, useMemo, useState } from 'react';
 import { css } from '@emotion/react';
-import { DataMask, styled, t } from '@superset-ui/core';
+import {
+  DataMask,
+  DataMaskStateWithId,
+  Filter,
+  NativeFilterType,
+  styled,
+  t,
+} from '@superset-ui/core';
 import {
   createHtmlPortalNode,
   InPortal,
   OutPortal,
 } from 'react-reverse-portal';
 import { Collapse } from 'src/common/components';
-import { DataMaskStateWithId } from 'src/dataMask/types';
 import {
   useDashboardHasTabs,
   useSelectFiltersInScope,
 } from 'src/dashboard/components/nativeFilters/state';
-import {
-  Filter,
-  NativeFilterType,
-} from 'src/dashboard/components/nativeFilters/types';
 import CascadePopover from '../CascadeFilters/CascadePopover';
 import { useFilters } from '../state';
 import { buildCascadeFiltersTree } from './utils';
 
 const Wrapper = styled.div`
   padding: ${({ theme }) => theme.gridUnit * 4}px;
-  &:hover {
-    cursor: pointer;
-  }
+  // 108px padding to make room for buttons with position: absolute
+  padding-bottom: ${({ theme }) => theme.gridUnit * 27}px;
 `;
 
 type FilterControlsProps = {
