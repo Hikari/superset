@@ -14,33 +14,25 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-COMPOSE_PROJECT_NAME=superset
 
-# database configurations (do not modify)
-DATABASE_DB=superset
-DATABASE_HOST=db
-DATABASE_PASSWORD=superset
-DATABASE_USER=superset
+#
+# This is an example "local" configuration file. In order to set/override config
+# options that ONLY apply to your local environment, simply copy/rename this file
+# to docker/pythonpath/superset_config_docker.py
+# It ends up being imported by docker/superset_config.py which is loaded by
+# superset/config.py
+#
 
-# database engine specific environment variables
-# change the below if you prefers another database engine
-DATABASE_PORT=5432
-DATABASE_DIALECT=postgresql
-POSTGRES_DB=superset
-POSTGRES_USER=superset
-POSTGRES_PASSWORD=superset
-#MYSQL_DATABASE=superset
-#MYSQL_USER=superset
-#MYSQL_PASSWORD=superset
-#MYSQL_RANDOM_ROOT_PASSWORD=yes
-
-# Add the mapped in /app/pythonpath_docker which allows devs to override stuff
-PYTHONPATH=/app/pythonpath:/app/docker/pythonpath_dev
-REDIS_HOST=redis
-REDIS_PORT=6379
-
-FLASK_ENV=development
-SUPERSET_ENV=development
-SUPERSET_LOAD_EXAMPLES=false
-CYPRESS_CONFIG=false
-SUPERSET_PORT=8088
+CACHE_TYPE = "redis"
+BABEL_DEFAULT_LOCALE = "en"
+ENABLE_PROXY_FIX = True
+FEATURE_FLAGS = {
+    "THUMBNAILS": True,
+    "THUMBNAILS_SQLA_LISTENERS": True,
+}
+DATA_CACHE_CONFIG = {
+    'CACHE_TYPE': 'redis',
+    'CACHE_DEFAULT_TIMEOUT': 60 * 60 * 24, # 1 day default (in secs)
+    'CACHE_KEY_PREFIX': 'superset_results',
+    'CACHE_REDIS_URL': 'redis://redis:6379/0',
+}
