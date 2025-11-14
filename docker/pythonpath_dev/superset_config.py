@@ -79,6 +79,11 @@ CACHE_CONFIG = {
 }
 DATA_CACHE_CONFIG = CACHE_CONFIG
 
+LANGUAGES = {
+    'de': {'flag': 'de', 'name': 'German'},
+    'en': {'flag': 'us', 'name': 'English'},
+}
+
 
 class CeleryConfig(object):
     BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
@@ -101,13 +106,14 @@ class CeleryConfig(object):
 
 CELERY_CONFIG = CeleryConfig
 
-FEATURE_FLAGS = {"ALERT_REPORTS": True}
-ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
+#FEATURE_FLAGS = {"ALERT_REPORTS": True}
+#ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
 WEBDRIVER_BASEURL = "http://superset:8088/"
 # The base URL for the email report hyperlinks.
 WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
 
 SQLLAB_CTAS_NO_LIMIT = True
+
 
 #
 # Optionally import superset_config_docker.py (which will have been included on
@@ -122,3 +128,30 @@ try:
     )
 except ImportError:
     logger.info("Using default Docker config...")
+
+
+## test auth
+SESSION_COOKIE_SAMESITE = None
+ENABLE_PROXY_FIX = True
+#PUBLIC_ROLE_LIKE_GAMMA = True
+FEATURE_FLAGS = {
+    "EMBEDDED_SUPERSET": True
+}
+GUEST_ROLE_NAME = "Public"
+GUEST_TOKEN_JWT_SECRET = "fmh-secret-key"
+GUEST_TOKEN_JWT_ALGO = "HS256"
+GUEST_TOKEN_HEADER_NAME = "X-GuestToken"
+GUEST_TOKEN_JWT_EXP_SECONDS = 300
+ENABLE_CORS = True
+HTTP_HEADERS = {}
+WTF_CSRF_ENABLED = False
+
+CORS_OPTIONS = {
+  'supports_credentials': True,
+  'allow_headers': ['*'],
+  'resources':['*'],
+  'origins': ['*', 'localhost:8080']
+}
+TALISMAN_ENABLED = False
+## end test
+
