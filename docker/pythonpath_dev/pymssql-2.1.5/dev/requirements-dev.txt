@@ -1,0 +1,6 @@
+cython
+gevent
+pytest
+setuptools
+sqlalchemy
+wheel
